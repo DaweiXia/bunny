@@ -1,5 +1,5 @@
 # 1 - Import Library
-import pygame, math, copy, os
+import pygame, math, random, os
 from pygame.locals import *
 
 # 2 - Initialize the game
@@ -10,12 +10,14 @@ keys = [False, False, False, False]
 playerpos = [100, 100]
 acc = [0, 0]
 arrows = []
+badguyspos = [[640, 100]]
 
 # 3 - Load images
 player = pygame.image.load("resources/images/dude.png")
 grass = pygame.image.load("resources/images/grass.png")
 castle = pygame.image.load("resources/images/castle.png")
 arrow = pygame.image.load("resources/images/bullet.png")
+badguy = pygame.image.load("resources/images/badguy.png")
 
 # 4 - Keep looping through
 while 1:
@@ -58,6 +60,21 @@ while 1:
     for bullet in arrows:
         bulletrot = pygame.transform.rotate(arrow, 360-bullet[0]*57.29)
         screen.blit(bulletrot, (bullet[1], bullet[2]))
+
+    # 6.3 - Draw badguys
+    badguyspos.append([640, random.randint(50, 430)])
+    removed_badguyspos = []
+    for i, badguypos in enumerate(badguyspos):
+        if badguypos[0] < -64:
+            removed_badguyspos.append(i)
+            continue
+        badguypos[0] -= 7
+        
+    for i in removed_badguyspos:
+        badguyspos.pop(i)
+        
+    for badguypos in badguyspos:
+        screen.blit(badguy, badguypos)
 
     # 7 - Update the screen
     pygame.display.flip()
