@@ -64,14 +64,14 @@ while 1:
     # 6.3 - Draw badguys
     badguyspos.append([640, random.randint(50, 430)])
     removed_badguyspos = []
-    for i, badguypos in enumerate(badguyspos):
+    for badguypos in badguyspos:
         if badguypos[0] < -64:
-            removed_badguyspos.append(i)
+            removed_badguyspos.append(badguypos)
             continue
         badguypos[0] -= 7
         
-    for i in removed_badguyspos:
-        badguyspos.pop(i)
+    for badguypos in removed_badguyspos:
+        badguyspos.remove(badguypos)
         
     for badguypos in badguyspos:
         screen.blit(badguy, badguypos)
