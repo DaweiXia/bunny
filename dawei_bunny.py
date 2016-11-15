@@ -44,17 +44,17 @@ while 1:
     
     # 6.2.1 - Move arrows
     removed_arrows = []
-    for i, bullet in enumerate(arrows):
+    for bullet in arrows:
         velx = math.cos(bullet[0])*10
         vely = math.sin(bullet[0])*10
-        arrows[i][1] += velx
-        arrows[i][2] += vely
-        if (arrows[i][1] < -64 or arrows[i][1] > 640 or
-            arrows[i][2] < -64 or arrows[i][2] > 480):
-            removed_arrows.append(i)
+        bullet[1] += velx
+        bullet[2] += vely
+        if (bullet[1] < -64 or bullet[1] > 640 or
+            bullet[2] < -64 or bullet[2] > 480):
+            removed_arrows.append(bullet)
             
-    for i in removed_arrows:
-        arrows.pop(i)
+    for bullet in removed_arrows:
+        arrows.remove(bullet)
         
     # 6.2.2 - Draw arrows
     for bullet in arrows:
