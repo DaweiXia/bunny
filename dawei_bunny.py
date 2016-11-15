@@ -11,6 +11,7 @@ playerpos = [100, 100]
 acc = [0, 0]
 arrows = []
 badguyspos = [[640, 100]]
+badtimer = 100
 
 # 3 - Load images
 player = pygame.image.load("resources/images/dude.png")
@@ -62,7 +63,10 @@ while 1:
         screen.blit(bulletrot, (bullet[1], bullet[2]))
 
     # 6.3 - Draw badguys
-    badguyspos.append([640, random.randint(50, 430)])
+    if badtimer == 0:
+        badguyspos.append([640, random.randint(50, 430)])
+        badtimer = random.randint(1, 100)
+        
     removed_badguyspos = []
     for badguypos in badguyspos:
         if badguypos[0] < -64:
@@ -122,3 +126,5 @@ while 1:
         playerpos[0] -= 5
     elif keys[3]:
         playerpos[0] += 5
+
+    badtimer -= 1
