@@ -53,9 +53,6 @@ while 1:
         if (bullet[1] < -64 or bullet[1] > 640 or
             bullet[2] < -64 or bullet[2] > 480):
             removed_arrows.append(bullet)
-            
-    for bullet in removed_arrows:
-        arrows.remove(bullet)
         
     # 6.2.2 - Draw arrows
     for bullet in arrows:
@@ -69,10 +66,25 @@ while 1:
         
     removed_badguyspos = []
     for badguypos in badguyspos:
+        # 6.3.1 Kill badguys
+        badguypos[0] -= 7
+        badrect = pygame.Rect(badguy.get_rect())
+        badrect.left = badguypos[0]
+        badrect.top = badguypos[1]
+        for bullet in arrows:
+            bullrect = pygame.Rect(arrow.get_rect())
+            bullrect.left = bullet[1]
+            bullrect.top = bullet[2]
+            if badrect.colliderect(bullrect):
+                removed_badguyspos.append(badguypos)
+                removed_arrows.append(bullet)
+                break
         if badguypos[0] < -64:
             removed_badguyspos.append(badguypos)
             continue
-        badguypos[0] -= 7
+
+    for bullet in removed_arrows:
+        arrows.remove(bullet) # Here has a bug
         
     for badguypos in removed_badguyspos:
         badguyspos.remove(badguypos)
