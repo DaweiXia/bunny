@@ -65,7 +65,7 @@ while 1:
     # 6.3 - Draw badguys
     if badtimer == 0:
         badguyspos.append([640, random.randint(50, 430)])
-        badtimer = random.randint(1, 100)
+        badtimer = random.randint(10, 100)
         
     removed_badguyspos = []
     for badguypos in badguyspos:
