@@ -52,7 +52,8 @@ while 1:
         bullet[2] += vely
         if (bullet[1] < -64 or bullet[1] > 640 or
             bullet[2] < -64 or bullet[2] > 480):
-            removed_arrows.append(bullet)
+            if bullet not in removed_arrows:
+                removed_arrows.append(bullet)
         
     # 6.2.2 - Draw arrows
     for bullet in arrows:
@@ -76,8 +77,10 @@ while 1:
             bullrect.left = bullet[1]
             bullrect.top = bullet[2]
             if badrect.colliderect(bullrect):
-                removed_badguyspos.append(badguypos)
-                removed_arrows.append(bullet)
+                if badguypos not in removed_badguyspos:
+                    removed_badguyspos.append(badguypos)
+                if bullet not in removed_arrows:
+                    removed_arrows.append(bullet)
                 break
         if badguypos[0] < -64:
             removed_badguyspos.append(badguypos)
