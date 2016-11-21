@@ -55,14 +55,14 @@ while 1:
             if bullet not in removed_arrows:
                 removed_arrows.append(bullet)
 
-    # 6.3 - Draw badguys
+    # 6.3 - Generate badguys
     if badtimer == 0:
         badguyspos.append([640, random.randint(50, 430)])
         badtimer = random.randint(10, 100)   # Why 10: Avoid one bullet kill two badguys, which will cause an error.
-        
+
+    # 6.4 - Move badguys
     removed_badguyspos = []
     for badguypos in badguyspos:
-        # 6.3.1 Kill badguys
         badguypos[0] -= 7
         badrect = pygame.Rect(badguy.get_rect())
         badrect.left = badguypos[0]
@@ -81,13 +81,15 @@ while 1:
             removed_badguyspos.append(badguypos)
             continue
 
+    # 6.5 - Draw arrows
     for bullet in removed_arrows:
         arrows.remove(bullet)
-        
-    # 6.2.2 - Draw arrows
+
     for bullet in arrows:
         bulletrot = pygame.transform.rotate(arrow, 360-bullet[0]*57.29)
-        screen.blit(bulletrot, (bullet[1], bullet[2]))        
+        screen.blit(bulletrot, (bullet[1], bullet[2]))
+
+    # 6.6 - Draw badguys
     for badguypos in removed_badguyspos:
         badguyspos.remove(badguypos)
         
