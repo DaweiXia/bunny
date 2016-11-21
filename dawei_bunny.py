@@ -87,7 +87,7 @@ while 1:
             continue
 
     for bullet in removed_arrows:
-        arrows.remove(bullet) # Here has a bug
+        arrows.remove(bullet)
         
     for badguypos in removed_badguyspos:
         badguyspos.remove(badguypos)
