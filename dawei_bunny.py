@@ -54,11 +54,6 @@ while 1:
             bullet[2] < -64 or bullet[2] > 480):
             if bullet not in removed_arrows:
                 removed_arrows.append(bullet)
-        
-    # 6.2.2 - Draw arrows
-    for bullet in arrows:
-        bulletrot = pygame.transform.rotate(arrow, 360-bullet[0]*57.29)
-        screen.blit(bulletrot, (bullet[1], bullet[2]))
 
     # 6.3 - Draw badguys
     if badtimer == 0:
@@ -89,6 +84,10 @@ while 1:
     for bullet in removed_arrows:
         arrows.remove(bullet)
         
+    # 6.2.2 - Draw arrows
+    for bullet in arrows:
+        bulletrot = pygame.transform.rotate(arrow, 360-bullet[0]*57.29)
+        screen.blit(bulletrot, (bullet[1], bullet[2]))        
     for badguypos in removed_badguyspos:
         badguyspos.remove(badguypos)
         
