@@ -19,6 +19,8 @@ grass = pygame.image.load("resources/images/grass.png")
 castle = pygame.image.load("resources/images/castle.png")
 arrow = pygame.image.load("resources/images/bullet.png")
 badguy = pygame.image.load("resources/images/badguy.png")
+healthbar = pygame.image.load("resources/images/healthbar.png")
+health = pygame.image.load("resources/images/health.png")
 
 # 4 - Keep looping through
 while 1:
@@ -29,6 +31,7 @@ while 1:
     for i in range(0, width/grass.get_width()+1):
         for j in range(0, height/grass.get_height()+1):
             screen.blit(grass, (i*grass.get_width(), j*grass.get_height()))
+            
     screen.blit(castle, (0, 30))
     screen.blit(castle, (0, 135))
     screen.blit(castle, (0, 240))
