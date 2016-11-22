@@ -43,7 +43,7 @@ while 1:
                   playerpos[1]-playerrot.get_rect().height/2)
     screen.blit(playerrot, playerpos1)
     
-    # 6.2.1 - Move arrows
+    # 6.2 - Move arrows
     removed_arrows = []
     for bullet in arrows:
         velx = math.cos(bullet[0])*10
@@ -52,7 +52,6 @@ while 1:
         bullet[2] += vely
         if (bullet[1] < -64 or bullet[1] > 640 or
             bullet[2] < -64 or bullet[2] > 480):
-<<<<<<< HEAD
             if bullet not in removed_arrows:
                 removed_arrows.append(bullet)
 
@@ -91,49 +90,9 @@ while 1:
         screen.blit(bulletrot, (bullet[1], bullet[2]))
 
     # 6.6 - Draw badguys
-=======
-            removed_arrows.append(bullet)
-        
-    # 6.2.2 - Draw arrows
-    for bullet in arrows:
-        bulletrot = pygame.transform.rotate(arrow, 360-bullet[0]*57.29)
-        screen.blit(bulletrot, (bullet[1], bullet[2]))
-
-    # 6.3 - Move badguys
-    if badtimer == 0:
-        badguyspos.append([640, random.randint(50, 430)])
-        badtimer = random.randint(1, 100)
-
-    removed_badguyspos = []
-    for badguypos in badguyspos:
-        # 6.3.1 - Attack castle
-        badrect = pygame.Rect(badguy.get_rect())
-        badrect.left = badguypos[0]
-        badrect.top = badguypos[1]
-        if badrect.left < 64:
-            removed_badguyspos.append(badguypos)
-            continue
-
-        # 6.3.2 - Check for collisions
-        for bullet in arrows:
-            bullrect = pygame.Rect(arrow.get_rect())
-            bullrect.left = bullet[1]
-            bullrect.top = bullet[2]
-            if badrect.colliderect(bullrect):
-                acc[0] += 1
-                removed_badguyspos.append(badguypos)
-                removed_arrows.append(bullet)
-                
-        badguypos[0] -= 7
-
-    # 6.4 - Remove bullets and badguys
-    for bullet in removed_arrows:
-        arrows.remove(bullet)
->>>>>>> efe384845fd5c1a9c5e0641b1f8ec8c09ca1283d
     for badguypos in removed_badguyspos:
         badguyspos.remove(badguypos)
-
-    # 6.5 - Draw badguys
+        
     for badguypos in badguyspos:
         screen.blit(badguy, badguypos)
 
