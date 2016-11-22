@@ -28,21 +28,23 @@ while 1:
     # 5 - clear the screen before drawing it again
     screen.fill((255,0,255))
 
-    # 6 - Draw the screen elements
+    # 6.0 - Draw grass
     for i in range(0, width/grass.get_width()+1):
         for j in range(0, height/grass.get_height()+1):
             screen.blit(grass, (i*grass.get_width(), j*grass.get_height()))
-            
+
+    # 6.2 - Draw castle
     screen.blit(castle, (0, 30))
     screen.blit(castle, (0, 135))
     screen.blit(castle, (0, 240))
     screen.blit(castle, (0, 345))
 
+    # 6.3 - Draw healthbar
     screen.blit(healthbar, (5,5))
     for index in range(healthvalue):
         screen.blit(health, (index+8,8))
         
-    # 6.1 - Set player position and rotation
+    # 6.4 - Set player position and rotation then draw player
     position = pygame.mouse.get_pos()
     angle = math.atan2(position[1]-(playerpos[1]+32),
                        position[0]-(playerpos[0]+26))
@@ -51,7 +53,7 @@ while 1:
                   playerpos[1]-playerrot.get_rect().height/2)
     screen.blit(playerrot, playerpos1)
     
-    # 6.2 - Move arrows
+    # 6.5 - Move arrows
     removed_arrows = []
     for bullet in arrows:
         velx = math.cos(bullet[0])*10
@@ -63,12 +65,12 @@ while 1:
             if bullet not in removed_arrows:
                 removed_arrows.append(bullet)
 
-    # 6.3 - Generate badguys
+    # 6.6 - Generate badguys at suitable positiona with suitable frequency
     if badtimer == 0:
         badguyspos.append([640, random.randint(50, 430)])
         badtimer = random.randint(10, 100)   # Why 10: Avoid one bullet kill two badguys, which will cause an error.
 
-    # 6.4 - Move badguys
+    # 6.7 - Move badguys
     removed_badguyspos = []
     for badguypos in badguyspos:
         badguypos[0] -= 7
@@ -90,7 +92,7 @@ while 1:
             removed_badguyspos.append(badguypos)
             continue
 
-    # 6.5 - Draw arrows
+    # 6.8 - Draw arrows
     for bullet in removed_arrows:
         arrows.remove(bullet)
 
@@ -98,14 +100,14 @@ while 1:
         bulletrot = pygame.transform.rotate(arrow, 360-bullet[0]*57.29)
         screen.blit(bulletrot, (bullet[1], bullet[2]))
 
-    # 6.6 - Draw badguys
+    # 6.9 - Draw badguys
     for badguypos in removed_badguyspos:
         badguyspos.remove(badguypos)
         
     for badguypos in badguyspos:
         screen.blit(badguy, badguypos)
 
-    # 6.7 - Draw clock
+    # 6.10 - Draw clock
     font = pygame.font.Font(None, 24)
     survivedtext = font.render(str(pygame.time.get_ticks()/60000)+":"+
                                str(pygame.time.get_ticks()/1000%60).zfill(2),
