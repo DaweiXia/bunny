@@ -12,6 +12,7 @@ acc = [0, 0]
 arrows = []
 badguyspos = [[640, 100]]
 badtimer = 100
+healthvalue = 194
 
 # 3 - Load images
 player = pygame.image.load("resources/images/dude.png")
@@ -36,7 +37,11 @@ while 1:
     screen.blit(castle, (0, 135))
     screen.blit(castle, (0, 240))
     screen.blit(castle, (0, 345))
-    
+
+    screen.blit(healthbar, (5,5))
+    for index in range(healthvalue):
+        screen.blit(health, (index+8,8))
+        
     # 6.1 - Set player position and rotation
     position = pygame.mouse.get_pos()
     angle = math.atan2(position[1]-(playerpos[1]+32),
@@ -80,7 +85,8 @@ while 1:
                 if bullet not in removed_arrows:
                     removed_arrows.append(bullet)
                 break
-        if badguypos[0] < -64:
+        if badguypos[0] < 64:
+            healthvalue -= random.randint(5,20)
             removed_badguyspos.append(badguypos)
             continue
 
