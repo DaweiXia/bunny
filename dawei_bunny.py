@@ -22,9 +22,12 @@ arrow = pygame.image.load("resources/images/bullet.png")
 badguy = pygame.image.load("resources/images/badguy.png")
 healthbar = pygame.image.load("resources/images/healthbar.png")
 health = pygame.image.load("resources/images/health.png")
+gameover = pygame.image.load("resources/images/gameover.png")
+youwin = pygame.image.load("resources/images/youwin.png")
 
 # 4 - Keep looping through
-while 1:
+running, exitcode = 1, 0
+while running:
     # 5 - clear the screen before drawing it again
     screen.fill((255,0,255))
 
@@ -163,4 +166,26 @@ while 1:
     elif keys[3]:
         playerpos[0] += 5
 
+    # 10 - Update badtimer
     badtimer -= 1
+
+    # 11 - Win/Lose check
+    if pygame.time.get_ticks() >= 90000:
+        running = 0
+        exitcode = 0
+    if healthvalue <= 0:
+        running = 0
+        exitcode = 1
+
+# 12 - Win/Lose display
+if exitcode == 1:
+    screen.blit(gameover, (0,0))
+else:
+    screen.blit(youwin, (0,0))
+
+while 1:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit(0)
+    pygame.display.flip()
