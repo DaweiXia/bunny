@@ -80,6 +80,7 @@ while running:
             bullrect.left = bullet[1]
             bullrect.top = bullet[2]
             if badrect.colliderect(bullrect):
+                acc[0] += 1
                 if badguypos not in removed_badguyspos:
                     removed_badguyspos.append(badguypos)
                 if bullet not in removed_arrows:
@@ -176,11 +177,29 @@ while running:
     if healthvalue <= 0:
         running = 0
         exitcode = 1
+    if acc[1] != 0:
+        accuracy = acc[0] * 1.0 / acc[1] * 100
+    else:
+        accuracy = 0
 
 # 12 - Win/Lose display
 if exitcode == 1:
+    pygame.font.init()
+    font = pygame.font.Font(None, 24)
+    text = font.render("Accuracy: " + str(accuracy) + "%", True, (255, 0, 0))
+    textRect = text.get_rect()
+    textRect.centerx = screen.get_rect().centerx
+    textRect.centery = screen.get_rect().centery + 24
+    screen.blit(text, textRect)
     screen.blit(gameover, (0,0))
 else:
+    pygame.font.init()
+    font = pygame.font.Font(None, 24)
+    text = font.render("Accuracy: " + str(accuracy) + "%", True, (0, 255, 0))
+    textRect = text.get_rect()
+    textRect.centerx = screen.get_rect().centerx
+    textRect.centery = screen.get_rect().centery + 24
+    screen.blit(text, textRect)
     screen.blit(youwin, (0,0))
 
 while 1:
