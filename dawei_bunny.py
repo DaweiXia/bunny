@@ -41,13 +41,8 @@ while running:
     screen.blit(castle, (0, 135))
     screen.blit(castle, (0, 240))
     screen.blit(castle, (0, 345))
-
-    # 6.3 - Draw healthbar
-    screen.blit(healthbar, (5,5))
-    for index in range(healthvalue):
-        screen.blit(health, (index+8,8))
         
-    # 6.4 - Set player position and rotation then draw player
+    # 6.3 - Set player position and rotation then draw player
     position = pygame.mouse.get_pos()
     angle = math.atan2(position[1]-(playerpos[1]+32),
                        position[0]-(playerpos[0]+26))
@@ -56,7 +51,7 @@ while running:
                   playerpos[1]-playerrot.get_rect().height/2)
     screen.blit(playerrot, playerpos1)
     
-    # 6.5 - Move arrows
+    # 6.4 - Move arrows
     removed_arrows = []
     for bullet in arrows:
         velx = math.cos(bullet[0])*10
@@ -68,12 +63,12 @@ while running:
             if bullet not in removed_arrows:
                 removed_arrows.append(bullet)
 
-    # 6.6 - Generate badguys at suitable positiona with suitable frequency
+    # 6.5 - Generate badguys at suitable positiona with suitable frequency
     if badtimer == 0:
         badguyspos.append([640, random.randint(50, 430)])
         badtimer = random.randint(10, 100)   # Why 10: Avoid one bullet kill two badguys, which will cause an error.
 
-    # 6.7 - Move badguys
+    # 6.6 - Move badguys
     removed_badguyspos = []
     for badguypos in badguyspos:
         badguypos[0] -= 7
@@ -95,7 +90,7 @@ while running:
             removed_badguyspos.append(badguypos)
             continue
 
-    # 6.8 - Draw arrows
+    # 6.7 - Draw arrows
     for bullet in removed_arrows:
         arrows.remove(bullet)
 
@@ -103,12 +98,17 @@ while running:
         bulletrot = pygame.transform.rotate(arrow, 360-bullet[0]*57.29)
         screen.blit(bulletrot, (bullet[1], bullet[2]))
 
-    # 6.9 - Draw badguys
+    # 6.8 - Draw badguys
     for badguypos in removed_badguyspos:
         badguyspos.remove(badguypos)
         
     for badguypos in badguyspos:
         screen.blit(badguy, badguypos)
+
+    # 6.9 - Draw healthbar
+    screen.blit(healthbar, (5,5))
+    for index in range(healthvalue):
+        screen.blit(health, (index+8,8))
 
     # 6.10 - Draw clock
     font = pygame.font.Font(None, 24)
