@@ -15,7 +15,7 @@ badguyspos = [[640, 100]]
 badtimer = 100
 healthvalue = 194
 
-# 3 - Load images
+# 3.1 - Load images
 player = pygame.image.load("resources/images/dude.png")
 grass = pygame.image.load("resources/images/grass.png")
 castle = pygame.image.load("resources/images/castle.png")
@@ -25,6 +25,17 @@ healthbar = pygame.image.load("resources/images/healthbar.png")
 health = pygame.image.load("resources/images/health.png")
 gameover = pygame.image.load("resources/images/gameover.png")
 youwin = pygame.image.load("resources/images/youwin.png")
+
+# 3.2 - Load audio
+hit = pygame.mixer.Sound("resources/audio/explode.wav")
+enemy = pygame.mixer.Sound("resources/audio/enemy.wav")
+shoot = pygame.mixer.Sound("resources/audio/shoot.wav")
+hit.set_volume(0.05)
+enemy.set_volume(0.05)
+shoot.set_volume(0.05)
+pygame.mixer.music.load("resources/audio/moonlight.wav")
+pygame.mixer.music.play(-1, 0.0)
+pygame.mixer.music.set_volume(0.25)
 
 # 4 - Keep looping through
 running, exitcode = 1, 0
