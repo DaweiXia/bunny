@@ -164,6 +164,7 @@ while running:
             elif event.key == K_d:
                 keys[3] = False
         if event.type == pygame.MOUSEBUTTONDOWN:
+            shoot.play()
             position = pygame.mouse.get_pos()
             dy = position[1] - (playerpos1[1] + playerrot.get_rect().height/2)
             dx = position[0] - (playerpos1[0] + playerrot.get_rect().width/2)
