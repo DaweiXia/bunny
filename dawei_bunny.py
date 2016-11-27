@@ -92,6 +92,7 @@ while running:
             bullrect.left = bullet[1]
             bullrect.top = bullet[2]
             if badrect.colliderect(bullrect):
+                enemy.play()
                 acc[0] += 1
                 if badguypos not in removed_badguyspos:
                     removed_badguyspos.append(badguypos)
