@@ -99,6 +99,7 @@ while running:
                     removed_arrows.append(bullet)
                 break
         if badguypos[0] < 64:
+            hit.play()
             healthvalue -= random.randint(5,20)
             removed_badguyspos.append(badguypos)
             continue
